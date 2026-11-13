@@ -1,0 +1,6 @@
+{
+  "name": "Voicest",
+  "description": "Online UTAU vocal synthesizer and editor with the WebTau engine, Auto-Oto generator, multipitch voicebanks, Auto-Gain staging and MP3/OGG export.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

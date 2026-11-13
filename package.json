@@ -1,0 +1,43 @@
+{
+  "name": "voicest",
+  "private": true,
+  "version": "1.7.0",
+  "description": "Browser-based UTAU vocal synthesizer and editor (WebUTAU engine, Cestloid voice, Auto-Oto, online voicebanks).",
+  "license": "MIT",
+  "homepage": "https://gitbuo.github.io/Voicest/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gitbuo/Voicest.git"
+  },
+  "engines": {
+    "node": ">=22.6"
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port=3000 --host=0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --experimental-strip-types --test src/lib/*.test.ts",
+    "lint": "tsc --noEmit",
+    "pack-voicebank": "node scripts/pack-voicebank.mjs",
+    "clean-voicebank": "node scripts/clean-voicebank.mjs"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@vitejs/plugin-react": "^6.1.1",
+    "d3": "^7.9.2",
+    "lamejs": "^1.2.1",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1",
+    "vite": "^8.3.0"
+  },
+  "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/node": "^22.14.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^7.0.2"
+  }
+}

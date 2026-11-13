@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voicest V2X - Vocal Synthesizer & DAW</title>
+    <link rel="icon" type="image/png" href="./logo.png" />
+    <meta name="description" content="Voicest V2X: Professional online vocal synthesizer and DAW with WebTau engine, Cestloid 8 Appends, Project Share URL generator, MusicXML, VSQX, CCS, UST, USTX, SVP, and MIDI multi-format support." />
+    <meta property="og:title" content="Voicest V2X - Vocal Synthesizer & DAW" />
+    <meta property="og:description" content="Voicest V2X: Professional online vocal synthesizer and DAW with WebTau engine, Cestloid 8 Appends, Project Share URL generator, MusicXML, VSQX, CCS, UST, USTX, SVP, and MIDI multi-format support." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Opened without a build (e.g. the source folder uploaded to a static host): open the editor directly.
+      addEventListener('load', () => setTimeout(() => {
+        if (!document.getElementById('root').hasChildNodes()) location.replace('public/voicest.html');
+      }, 1500));
+    </script>
+  </body>
+</html>

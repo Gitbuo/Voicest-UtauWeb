@@ -1,0 +1,12 @@
+# Cache rules for Cloudflare Pages (other hosts: see README, "Hosting voicebanks").
+# Voicebank parts have their hash in the file name, so they never change.
+/voicebanks/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Expose-Headers: Content-Length, Content-Range, Accept-Ranges
+  Cache-Control: public, max-age=31536000, immutable
+/voicebanks/*.json
+  Cache-Control: no-cache
+/sw.js
+  Cache-Control: no-cache
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
