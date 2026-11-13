@@ -17,7 +17,7 @@
     "dev": "vite --port=3000 --host=0.0.0.0",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node --experimental-strip-types --test src/lib/*.test.ts",
+    "test": "tsx --test src/lib/*.test.ts",
     "lint": "tsc --noEmit",
     "pack-voicebank": "node scripts/pack-voicebank.mjs",
     "clean-voicebank": "node scripts/clean-voicebank.mjs"

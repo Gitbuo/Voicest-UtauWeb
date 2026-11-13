@@ -1063,6 +1063,8 @@ export function exportUstx(project: ConvertedProject): string {
   y += `comment: "Created in Voicest V2X"\n`;
   y += `output_dir: Vocal\ncache_dir: UCache\nustx_version: 0.6\n`;
   y += `bpm: ${bpm}\nbeat_per_bar: 4\nbeat_unit: 4\nresolution: 480\n`;
+  y += `time_signatures:\n  - bar_position: 0\n    beat_per_bar: 4\n    beat_unit: 4\n`;
+  y += `tempos:\n  - position: 0\n    bpm: ${bpm}\n`;
   y += `tracks:\n`;
 
   tracks.forEach(tr => {
@@ -1082,8 +1084,8 @@ export function exportUstx(project: ConvertedProject): string {
     }
 
     sorted.forEach(n => {
-      const tickPos = n.s * 120;
-      const tickDur = n.l * 120;
+      const tickPos = Math.round(n.s * 120);
+      const tickDur = Math.max(120, Math.round(n.l * 120));
       y += `      - position: ${tickPos}\n`;
       y += `        duration: ${tickDur}\n`;
       y += `        tone: ${n.p}\n`;
@@ -1155,6 +1157,7 @@ export function parseUstx(ustxText: string): ConvertedProject {
         const stepPos = Math.round(tickPos / 120);
         const stepLen = Math.max(1, Math.round(tickDur / 120));
         const pitch = clampPitch(toneVal);
+        if (lyric.toUpperCase() === 'R') continue;
 
         const noteObj: ConvertedNote = {
           s: stepPos,
@@ -1382,7 +1385,7 @@ export function exportVpr(project: ConvertedProject): string {
       isFolded: false,
       height: 0.0,
       volume: { isFolded: true, height: 0.0, events: [{ pos: 0, value: 0 }] },
-      panpot: { isFolded: true, height: 0.0, events: [{ pos: 0, value: 0 }] },
+      panpot: { isFolded: true, height: 0.0, events: [{ pos: 0, value: Math.max(-64, Math.min(64, Math.round((tr.pan ?? 0) * 64))) }] },
       isMuted: !!tr.m,
       isSoloMode: !!tr.s,
       parts: [
@@ -1476,9 +1479,12 @@ export function parseVpr(vprText: string): ConvertedProject {
     }
 
     if (notes.length) {
+      const panEv = tr.panpot?.events?.[0]?.value;
+      const pan = typeof panEv === 'number' && isFinite(panEv) ? Math.max(-1, Math.min(1, Math.round((panEv / 64) * 100) / 100)) : 0;
       tracks.push({
         name: trName,
         k: 'Voice',
+        pan,
         m: tr.isMuted ? 1 : 0,
         s: tr.isSoloMode ? 1 : 0,
         notes,

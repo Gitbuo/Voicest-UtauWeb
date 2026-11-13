@@ -200,6 +200,8 @@ describe('Voicest V2X Multi-Format Converter', () => {
 
     const yaml = exportUstx(ustxProj);
     assert.ok(yaml.includes('ustx_version: 0.6'));
+    assert.ok(yaml.includes('tempos:'));
+    assert.ok(yaml.includes('time_signatures:'));
     assert.ok(yaml.includes('pitch:'));
 
     const parsed = parseUstx(yaml);
@@ -242,7 +244,7 @@ describe('Voicest V2X Multi-Format Converter', () => {
     assert.equal(parsed.tracks[1].k, 'Piano');
   });
 
-  it('VPR: exports and parses Vocaloid 5/6 projects with pitchBend controllers', () => {
+  it('VPR: exports and parses Vocaloid 5/6 projects with pitchBend controllers and pan/mute', () => {
     const vprProj: ConvertedProject = {
       name: 'V5 Song',
       bpm: 118,
@@ -251,6 +253,7 @@ describe('Voicest V2X Multi-Format Converter', () => {
         {
           name: 'V5 Vocal',
           k: 'Voice',
+          pan: 0.5,
           m: 1,
           notes: [
             { s: 0, l: 4, p: 65, t: 'na', pc: [[0, 63.5], [2, 65], [4, 65]] },
@@ -264,6 +267,7 @@ describe('Voicest V2X Multi-Format Converter', () => {
     assert.equal(parsed.name, 'V5 Song');
     assert.equal(parsed.bpm, 118);
     assert.equal(parsed.tracks[0].m, 1);
+    assert.equal(parsed.tracks[0].pan, 0.5);
     assert.equal(parsed.tracks[0].notes[0].t, 'na');
     assert.ok(parsed.tracks[0].notes[0].pc && parsed.tracks[0].notes[0].pc.length >= 2);
   });
